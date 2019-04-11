@@ -96,7 +96,7 @@ def _configure_project(name_project: str):
         'PASSWORD': os.getenv('DATABASE_PASSWORD'),
         'HOST': os.getenv('DATABASE_HOST', 'localhost'),
         'PORT': os.environ['DATABASE_PORT'],\
-        """)
+""")
 
     # Modify wsgi.py and add Gunicorn conf
     file_gunicorn = os.path.join(name_project, name_project,
@@ -179,7 +179,7 @@ schema_view = get_schema_view(
     swagger_info,
     public=True,
     permission_classes=(permissions.AllowAny,),
-)              
+)
 """)
     replace_text(urls_py,
                  "path('health_check/', include('health_check.urls')),",
