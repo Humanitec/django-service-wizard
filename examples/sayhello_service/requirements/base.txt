@@ -1,0 +1,7 @@
+Django~=2.1.7
+django-filter==2.1.0
+django-health-check==3.8.0
+git+https://github.com/Humanitec/django-oauth-toolkit-jwt@v0.5.2#egg=django-oauth-toolkit-jwt
+djangorestframework==3.9.1
+psycopg2-binary==2.7.7
+drf-yasg==1.10.2
