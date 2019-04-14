@@ -214,6 +214,7 @@ def _configure_docker(name_project: str):
         [os.path.join('docker', 'Dockerfile'), '.', 0o644],
         [os.path.join('docker', 'Dockerfile.nginx'), '.', 0o644],
         [os.path.join('docker', 'docker-compose.yml'), '.', 0o644],
+        [os.path.join('docker', '.env'), '.', 0o644],
         [os.path.join('docker', '.dockerignore'), '.', 0o644],
         [os.path.join('docker', 'docker-entrypoint.sh'), '.', 0o755],
         [os.path.join('docker', 'docker-entrypoint-dev.sh'), '.', 0o755],
