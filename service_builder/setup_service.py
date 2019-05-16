@@ -281,11 +281,11 @@ def setup():
     main_dir = os.getcwd()
     _welcome_msg()
     name_project = get_input(
-        'Type in the name of your service (e.g.: appointments_service):')
+        'Type in the name of your service (e.g.: appointment_service):')
     _create_project(name_project)
     _configure_project(name_project)
     name_app = get_input(
-        'Type in the name of your application (e.g.: appointment):')
+        'Type in the name of your application (e.g.: appointments):')
     _create_app(name_project, name_app)
 
     is_answer_yes_docker = yes_or_no('Add Docker support?')
