@@ -1,8 +1,9 @@
 version: "3.1"
 
 services:
-
   postgres_sayhello_service:
+    env_file:
+      - .env
     container_name: postgres_sayhello_service
     healthcheck:
       test: "pg_isready -h localhost -p 5432 -q -U postgres"
@@ -10,15 +11,13 @@ services:
       timeout: 5s
       retries: 5
     image: postgres:10.4-alpine
-    environment:
-      POSTGRES_DB: sayhello_service
-      POSTGRES_USER: root
-      POSTGRES_PASSWORD: root
     volumes:
       - /var/lib/postgresql/data/
     restart: always
 
   sayhello_service:
+    env_file:
+      - .env
     build:
       context: .
       dockerfile: Dockerfile
@@ -32,19 +31,8 @@ services:
     depends_on:
       - postgres_sayhello_service
     environment:
-      ALLOWED_HOSTS: localhost,127.0.0.1,0.0.0.0
-      CORS_ORIGIN_WHITELIST: localhost,127.0.0.1,0.0.0.0
-      DATABASE_ENGINE: "postgresql"
-      DATABASE_NAME: "sayhello_service"
-      DATABASE_USER: "root"
-      DATABASE_PASSWORD: "root"
-      DATABASE_HOST: "postgres_sayhello_service"
-      DATABASE_PORT: "5432"
-      DEBUG: "True"
-      SECRET_KEY: "nothing"
       JWT_PUBLIC_KEY_RSA_BIFROST: |-
         -----BEGIN PUBLIC KEY-----
         MFwwDQYJKoZIhvcNAQEBBQADSwAwSAJBALFc9NFZaOaSwUMPNektbtJqEjYZ6IRB
         qhqvJu1hKPYn9HYd75c0gIDYHJ9lb7QwQvg44aO27104rDK0xSstzL0CAwEAAQ==
         -----END PUBLIC KEY-----
-      STATIC_ROOT: /static/
