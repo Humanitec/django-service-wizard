@@ -1,34 +1,35 @@
 version: "3.1"
 
 services:
-
-  postgres_{{ name_project }}:
-    container_name: postgres_{{ name_project }}
+  postgres_sayhello_service:
+    env_file:
+      - .env
+    container_name: postgres_sayhello_service
     healthcheck:
       test: "pg_isready -h localhost -p 5432 -q -U postgres"
       interval: 3s
       timeout: 5s
       retries: 5
     image: postgres:10.4-alpine
-    env_file: .env
     volumes:
       - /var/lib/postgresql/data/
     restart: always
 
-  {{ name_project }}:
+  sayhello_service:
+    env_file:
+      - .env
     build:
       context: .
       dockerfile: Dockerfile
     entrypoint: bash /code/docker-entrypoint-dev.sh
-    container_name: {{ name_project }}
-    image: {{ name_project }}
+    container_name: sayhello_service
+    image: sayhello_service
     volumes:
       - .:/code
     ports:
       - "8080:8080"
     depends_on:
-      - postgres_{{ name_project }}
-    env_file: .env
+      - postgres_sayhello_service
     environment:
       JWT_PUBLIC_KEY_RSA_BIFROST: |-
         -----BEGIN PUBLIC KEY-----

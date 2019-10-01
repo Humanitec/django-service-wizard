@@ -96,7 +96,7 @@ def _configure_project(name_project: str):
         'PASSWORD': os.getenv('DATABASE_PASSWORD'),
         'HOST': os.getenv('DATABASE_HOST', 'localhost'),
         'PORT': os.environ['DATABASE_PORT'],\
-        """)
+""")
 
     # Modify wsgi.py and add Gunicorn conf
     file_gunicorn = os.path.join(name_project, name_project,
@@ -179,7 +179,7 @@ schema_view = get_schema_view(
     swagger_info,
     public=True,
     permission_classes=(permissions.AllowAny,),
-)              
+)
 """)
     replace_text(urls_py,
                  "path('health_check/', include('health_check.urls')),",
@@ -214,6 +214,7 @@ def _configure_docker(name_project: str):
         [os.path.join('docker', 'Dockerfile'), '.', 0o644],
         [os.path.join('docker', 'Dockerfile.nginx'), '.', 0o644],
         [os.path.join('docker', 'docker-compose.yml'), '.', 0o644],
+        [os.path.join('docker', '.env'), '.', 0o644],
         [os.path.join('docker', '.dockerignore'), '.', 0o644],
         [os.path.join('docker', 'docker-entrypoint.sh'), '.', 0o755],
         [os.path.join('docker', 'docker-entrypoint-dev.sh'), '.', 0o755],
@@ -280,11 +281,11 @@ def setup():
     main_dir = os.getcwd()
     _welcome_msg()
     name_project = get_input(
-        'Type in the name of your service (e.g.: appointments_service):')
+        'Type in the name of your service (e.g.: appointment_service):')
     _create_project(name_project)
     _configure_project(name_project)
     name_app = get_input(
-        'Type in the name of your application (e.g.: appointment):')
+        'Type in the name of your application (e.g.: appointments):')
     _create_app(name_project, name_app)
 
     is_answer_yes_docker = yes_or_no('Add Docker support?')
